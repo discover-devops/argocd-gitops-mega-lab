@@ -12,7 +12,7 @@ A small production-style three-tier app: an nginx frontend, a FastAPI backend, a
 | Lab | Title | What you learn |
 |---|---|---|
 | 0 | [Prerequisites and EKS Cluster Setup](LAB_0/) | Tools, AWS account, fork, EKS cluster, storage. Finish this before class |
-| 1 | [GitOps Foundations](LAB_1/) | Argo CD install, first Application, Git to Argo CD to Kubernetes |
+| 1 | [GitOps Foundations](LAB_1/) | CI builds your images, Argo CD install, first Application, change production through Git |
 | 2 | [Self-Healing Cluster](LAB_2/) | Drift, self-heal, automated sync, prune, full lifecycle |
 | 3 | One-Command Cluster Bootstrap | App-of-Apps, sync waves, bootstrap from one root application |
 | 4 | Production Sync Controls | Advanced sync options, HPA vs Argo CD with ignoreDifferences, sync windows |

@@ -245,6 +245,10 @@ The first push opens a browser window asking you to sign in to GitHub. Sign in a
 **Concept: Why test the push now?**
 Everything in GitOps happens through `git push`. If your push does not work, nothing in Lab 1 will work. It is much better to find that out today than in the middle of class.
 
+### Step 5. Have a Docker Hub account ready
+
+In Lab 1 you will build the application images yourself and push them to Docker Hub. If you do not have a Docker Hub account, create a free one at https://hub.docker.com and note your username.
+
 ---
 
 ## Part 4 - Create the EKS cluster
@@ -368,6 +372,7 @@ Run all of these. Every line must pass before Lab 1.
 | Storage | `kubectl get storageclass` | gp3 (default) |
 | Git push | `git push origin main` | Everything up-to-date |
 | Your fork | `git remote -v` | URLs contain your GitHub username, not discover-devops |
+| Docker Hub | Log in at https://hub.docker.com | You know your Docker Hub username |
 
 If every check passes, you are ready for Lab 1.
 

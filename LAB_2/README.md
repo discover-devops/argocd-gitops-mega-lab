@@ -55,6 +55,16 @@ cd LAB_2
 
 From now on, run every command in this lab from inside the `LAB_2` folder.
 
+If you synced new lab folders, point them at your own images again, exactly as in Lab 1 Part 3:
+
+```bash
+export DH_USER=<your-dockerhub-username>
+sed -i "s#discoverdevops/taskflow#$DH_USER/taskflow#g" ../LAB_*/k8s/taskflow/*.yaml
+git add ../LAB_*/k8s/taskflow/ && git commit -m "use my own TaskFlow images" && git push origin main
+```
+
+If Git says "nothing to commit", your files already use your images.
+
 You need your cluster from Lab 1, with Argo CD installed and TaskFlow showing **Synced** and **Healthy**.
 
 Check it:
