@@ -17,6 +17,14 @@ Let us begin.
 
 ---
 
+## Architecture of this lab
+
+![Lab 0 architecture](../diagrams/lab-0-architecture.png)
+
+The editable diagram is in the `diagrams` folder at the top of the repository, as `lab-0-architecture.excalidraw`. To open it, go to https://excalidraw.com, click the menu, choose **Open**, and select the file.
+
+---
+
 ## What this lab covers
 
 1. Installing the tools: git, AWS CLI, kubectl and eksctl

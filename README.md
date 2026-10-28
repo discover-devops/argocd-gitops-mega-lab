@@ -22,6 +22,16 @@ A small production-style three-tier app: an nginx frontend, a FastAPI backend, a
 
 Every lab has its own folder with its own runbook (README.md) and Kubernetes files. Each folder starts exactly where the previous lab ended, so you can open and follow any lab on its own. Start with LAB_0.
 
+## Diagrams
+
+Every lab has an architecture diagram in the `diagrams` folder. The PNG is for viewing. The `.excalidraw` file opens and edits at https://excalidraw.com (menu, then **Open**).
+
+| Lab | View | Edit |
+|---|---|---|
+| 0 | [lab-0-architecture.png](diagrams/lab-0-architecture.png) | [lab-0-architecture.excalidraw](diagrams/lab-0-architecture.excalidraw) |
+| 1 | [lab-1-architecture.png](diagrams/lab-1-architecture.png) | [lab-1-architecture.excalidraw](diagrams/lab-1-architecture.excalidraw) |
+| 2 | [lab-2-architecture.png](diagrams/lab-2-architecture.png) | [lab-2-architecture.excalidraw](diagrams/lab-2-architecture.excalidraw) |
+
 ## Repository layout
 
 ```text
@@ -29,6 +39,7 @@ LAB_0/               Prerequisites, tools and EKS cluster (cluster/ has the eksc
 LAB_1/               GitOps Foundations: runbook, k8s/ manifests, argocd/ Application
 LAB_2/               Self-Healing Cluster: runbook, k8s/, argocd/, extras/, solutions/
 LAB_3/ ... LAB_7/    Added as the course goes on
+diagrams/            Architecture diagram for every lab (PNG and editable Excalidraw)
 app/                 TaskFlow source code (api, frontend) and Dockerfiles
 .github/workflows/   Image build pipeline
 ```

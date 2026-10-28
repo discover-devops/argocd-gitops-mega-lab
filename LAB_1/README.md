@@ -17,6 +17,14 @@ Let us begin.
 
 ---
 
+## Architecture of this lab
+
+![Lab 1 architecture](../diagrams/lab-1-architecture.png)
+
+The editable diagram is in the `diagrams` folder at the top of the repository, as `lab-1-architecture.excalidraw`. To open it, go to https://excalidraw.com, click the menu, choose **Open**, and select the file.
+
+---
+
 ## What you will build
 
 ```text

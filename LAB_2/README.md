@@ -17,6 +17,14 @@ Break things freely in this lab. That is the whole point.
 
 ---
 
+## Architecture of this lab
+
+![Lab 2 architecture](../diagrams/lab-2-architecture.png)
+
+The editable diagram is in the `diagrams` folder at the top of the repository, as `lab-2-architecture.excalidraw`. To open it, go to https://excalidraw.com, click the menu, choose **Open**, and select the file.
+
+---
+
 ## What this lab covers
 
 1. Managing the Argo CD Application as code
