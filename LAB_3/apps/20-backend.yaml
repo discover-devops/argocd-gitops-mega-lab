@@ -1,0 +1,23 @@
+# Wave 2: the FastAPI service. Needs the database.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: taskflow-backend
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<YOUR_GITHUB_USER>/argocd-gitops-mega-lab.git
+    targetRevision: main
+    path: LAB_3/workloads/backend
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: taskflow
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

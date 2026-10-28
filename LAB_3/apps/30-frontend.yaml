@@ -1,0 +1,23 @@
+# Wave 3: nginx and the public load balancer. Opens the door to users last.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: taskflow-frontend
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<YOUR_GITHUB_USER>/argocd-gitops-mega-lab.git
+    targetRevision: main
+    path: LAB_3/workloads/frontend
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: taskflow
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

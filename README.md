@@ -14,7 +14,7 @@ A small production-style three-tier app: an nginx frontend, a FastAPI backend, a
 | 0 | [Prerequisites and EKS Cluster Setup](LAB_0/) | Tools, AWS account, fork, EKS cluster, storage. Finish this before class |
 | 1 | [GitOps Foundations](LAB_1/) | CI builds your images, Argo CD install, first Application, change production through Git |
 | 2 | [Self-Healing Cluster](LAB_2/) | Drift, self-heal, automated sync, prune, full lifecycle |
-| 3 | One-Command Cluster Bootstrap | App-of-Apps, sync waves, bootstrap from one root application |
+| 3 | [One-Command Cluster Bootstrap](LAB_3/) | App-of-Apps, sync waves, bootstrap from one root application |
 | 4 | Production Sync Controls | Advanced sync options, HPA vs Argo CD with ignoreDifferences, sync windows |
 | 5 | Secrets the GitOps Way | The base64 trap, Sealed Secrets, secret rotation |
 | 6 | Multi-Cluster with ApplicationSet | Cluster registration, List generator, global rollout |
@@ -31,6 +31,7 @@ Every lab has an architecture diagram in the `diagrams` folder. The PNG is for v
 | 0 | [lab-0-architecture.png](diagrams/lab-0-architecture.png) | [lab-0-architecture.excalidraw](diagrams/lab-0-architecture.excalidraw) |
 | 1 | [lab-1-architecture.png](diagrams/lab-1-architecture.png) | [lab-1-architecture.excalidraw](diagrams/lab-1-architecture.excalidraw) |
 | 2 | [lab-2-architecture.png](diagrams/lab-2-architecture.png) | [lab-2-architecture.excalidraw](diagrams/lab-2-architecture.excalidraw) |
+| 3 | [lab-3-architecture.png](diagrams/lab-3-architecture.png) | [lab-3-architecture.excalidraw](diagrams/lab-3-architecture.excalidraw) |
 
 ## Repository layout
 
@@ -38,7 +39,8 @@ Every lab has an architecture diagram in the `diagrams` folder. The PNG is for v
 LAB_0/               Prerequisites, tools and EKS cluster (cluster/ has the eksctl config)
 LAB_1/               GitOps Foundations: runbook, k8s/ manifests, argocd/ Application
 LAB_2/               Self-Healing Cluster: runbook, k8s/, argocd/, extras/, solutions/
-LAB_3/ ... LAB_7/    Added as the course goes on
+LAB_3/               One-Command Bootstrap: runbook, bootstrap/, apps/, platform/, workloads/
+LAB_4/ ... LAB_7/    Added as the course goes on
 diagrams/            Architecture diagram for every lab (PNG and editable Excalidraw)
 app/                 TaskFlow source code (api, frontend) and Dockerfiles
 .github/workflows/   Image build pipeline

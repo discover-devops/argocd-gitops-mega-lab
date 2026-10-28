@@ -1,0 +1,23 @@
+# Teaches Argo CD how to judge the health of an Application resource.
+#
+# Why this is needed: since Argo CD 1.8, an Application that manages other
+# Applications does not look at their health. Without this, sync waves
+# between child Applications do not wait for the previous wave to be
+# Healthy, so everything starts at almost the same time.
+#
+# Apply once per Argo CD installation:
+#   kubectl patch configmap argocd-cm -n argocd --patch-file bootstrap/argocd-cm-app-health.yaml
+data:
+  resource.customizations.health.argoproj.io_Application: |
+    hs = {}
+    hs.status = "Progressing"
+    hs.message = ""
+    if obj.status ~= nil then
+      if obj.status.health ~= nil then
+        hs.status = obj.status.health.status
+        if obj.status.health.message ~= nil then
+          hs.message = obj.status.health.message
+        end
+      end
+    end
+    return hs

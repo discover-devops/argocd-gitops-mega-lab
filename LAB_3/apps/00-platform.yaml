@@ -1,0 +1,23 @@
+# Wave 0: namespace, guardrails and storage. Everything else lives on top of this.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: taskflow-platform
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<YOUR_GITHUB_USER>/argocd-gitops-mega-lab.git
+    targetRevision: main
+    path: LAB_3/platform
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: taskflow
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

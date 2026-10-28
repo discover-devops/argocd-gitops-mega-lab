@@ -1,0 +1,19 @@
+# Guardrail 2: sensible defaults for any container that forgets to set
+# its own CPU and memory. Without this, such a container would be
+# rejected by the ResourceQuota above.
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: taskflow-defaults
+  namespace: taskflow
+  labels:
+    app.kubernetes.io/part-of: taskflow
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 50m
+        memory: 64Mi
+      default:
+        cpu: 250m
+        memory: 256Mi

@@ -1,0 +1,18 @@
+# Guardrail 1: a hard budget for the whole taskflow namespace.
+# If a bad change asks for 50 replicas, Kubernetes refuses instead of
+# eating the whole cluster.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: taskflow-quota
+  namespace: taskflow
+  labels:
+    app.kubernetes.io/part-of: taskflow
+spec:
+  hard:
+    pods: "20"
+    requests.cpu: "2"
+    requests.memory: 2Gi
+    limits.cpu: "6"
+    limits.memory: 4Gi
+    persistentvolumeclaims: "5"

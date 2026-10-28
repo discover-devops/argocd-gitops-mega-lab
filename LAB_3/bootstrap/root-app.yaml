@@ -1,0 +1,27 @@
+# The ONE file you apply by hand.
+# It points Argo CD at the LAB_3/apps folder, which contains the
+# child Applications. Argo CD creates them, in sync-wave order.
+#
+#   kubectl apply -f bootstrap/root-app.yaml
+#
+# Replace <YOUR_GITHUB_USER> with your GitHub username before applying.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<YOUR_GITHUB_USER>/argocd-gitops-mega-lab.git
+    targetRevision: main
+    path: LAB_3/apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
