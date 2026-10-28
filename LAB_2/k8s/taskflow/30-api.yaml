@@ -52,9 +52,9 @@ spec:
           env:
             # ---- Lab 2 starts here: this is where Lab 1 ended ----
             - name: APP_VERSION
-              value: "1.1.0"
+              value: "1.2.0"
             - name: APP_MESSAGE
-              value: "Changed through Git - no kubectl!"
+              value: "Deployed automatically - nobody clicked Sync"
             - name: APP_ENV
               value: "dev"
             # --------------------------------------------------------------------
