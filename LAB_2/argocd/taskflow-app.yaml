@@ -16,4 +16,5 @@ spec:
     server: https://kubernetes.default.svc
     namespace: taskflow
   # Lab 1: manual sync only. Lab 2 turns on automated sync, selfHeal and prune.
-  syncPolicy: {}
+  syncPolicy:
+    automated: {}
