@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow</title>
+  <style>
+    :root { --bg:#0f172a; --card:#1e293b; --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+           background:var(--bg); color:var(--text); padding:16px; }
+    main { max-width:640px; margin:0 auto; }
+    h1 { margin:8px 0 4px; }
+    .banner { background:var(--card); border-left:4px solid var(--accent); padding:12px 16px;
+              border-radius:8px; margin:16px 0; }
+    .meta { color:var(--muted); font-size:14px; }
+    form { display:flex; gap:8px; margin:16px 0; }
+    input { flex:1; padding:10px; border-radius:6px; border:1px solid #334155;
+            background:#0b1220; color:var(--text); }
+    button { padding:10px 16px; border:0; border-radius:6px; background:var(--accent);
+             color:#0f172a; font-weight:600; cursor:pointer; }
+    ul { list-style:none; padding:0; }
+    li { background:var(--card); padding:10px 14px; border-radius:6px; margin-bottom:8px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>TaskFlow</h1>
+  <div class="meta">GitOps Mega Lab | Argo CD</div>
+
+  <div class="banner">
+    <div id="message">Loading...</div>
+    <div class="meta" id="meta"></div>
+  </div>
+
+  <form id="taskForm">
+    <input id="title" placeholder="Add a task..." maxlength="200" required>
+    <button type="submit">Add</button>
+  </form>
+
+  <ul id="tasks"></ul>
+</main>
+
+<script>
+async function loadVersion() {
+  try {
+    const r = await fetch('/api/version');
+    const v = await r.json();
+    document.getElementById('message').textContent = v.message;
+    document.getElementById('meta').textContent =
+      `version ${v.version} | env ${v.environment} | served by pod ${v.pod}`;
+  } catch (e) {
+    document.getElementById('message').textContent = 'API not reachable';
+  }
+}
+
+async function loadTasks() {
+  const ul = document.getElementById('tasks');
+  try {
+    const r = await fetch('/api/tasks');
+    const tasks = await r.json();
+    ul.innerHTML = '';
+    tasks.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t.title;
+      ul.appendChild(li);
+    });
+  } catch (e) {
+    ul.innerHTML = '<li>Could not load tasks</li>';
+  }
+}
+
+document.getElementById('taskForm').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const input = document.getElementById('title');
+  await fetch('/api/tasks', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({title: input.value})
+  });
+  input.value = '';
+  loadTasks();
+});
+
+loadVersion();
+loadTasks();
+</script>
+</body>
+</html>

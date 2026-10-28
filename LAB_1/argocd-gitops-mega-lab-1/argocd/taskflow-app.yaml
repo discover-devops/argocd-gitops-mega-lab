@@ -1,0 +1,19 @@
+# The same Application students create in the UI in Lab 1, written as code.
+# Apply:  kubectl apply -f argocd/taskflow-app.yaml
+# Before applying, replace <YOUR_GITHUB_USER> with your GitHub username (your fork).
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: taskflow
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<YOUR_GITHUB_USER>/argocd-gitops-mega-lab.git
+    targetRevision: main
+    path: k8s/taskflow
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: taskflow
+  # Lab 1: manual sync only. Lab 2 turns on automated sync, selfHeal and prune.
+  syncPolicy: {}

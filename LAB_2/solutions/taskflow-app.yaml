@@ -1,0 +1,24 @@
+# Lab 2 final state of the taskflow Application.
+# Automated sync, self-heal and prune are all on.
+# Replace <YOUR_GITHUB_USER> with your GitHub username before applying.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: taskflow
+  namespace: argocd
+  # Deleting this Application also deletes everything it deployed
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<YOUR_GITHUB_USER>/argocd-gitops-mega-lab.git
+    targetRevision: main
+    path: LAB_2/k8s/taskflow
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: taskflow
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

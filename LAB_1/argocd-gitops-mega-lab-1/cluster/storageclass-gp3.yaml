@@ -1,0 +1,17 @@
+# Default gp3 StorageClass backed by the EBS CSI driver.
+# Newer EKS clusters do not mark any StorageClass as default,
+# so Postgres' PVC would stay Pending without this.
+# (Lab 3 moves this into the "infrastructure" wave managed by Argo CD.)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  type: gp3
+  fsType: ext4

@@ -1,0 +1,33 @@
+# EKS cluster for the GitOps Mega Lab
+# Create:  eksctl create cluster -f cluster/eks-cluster.yaml   (~15-20 min)
+# Delete:  eksctl delete cluster -f cluster/eks-cluster.yaml
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: gitops-lab
+  region: ap-south-1
+  tags:
+    project: argocd-gitops-mega-lab
+    owner: discover-devops
+
+iam:
+  withOIDC: true          # needed for the EBS CSI driver (Postgres volume)
+
+addons:
+  - name: vpc-cni
+  - name: coredns
+  - name: kube-proxy
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
+
+managedNodeGroups:
+  - name: workers
+    instanceType: t3.large
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 3
+    volumeSize: 30
+    labels:
+      role: worker
