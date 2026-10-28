@@ -296,10 +296,10 @@ kubectl apply -f cluster/storageclass-gp3.yaml
 kubectl get storageclass
 ```
 
-**Checkpoint:** you see `gp3 (default)`.
+**Checkpoint:** you see `gp3 (default)`. You may also see an older `gp2` class. That is fine. It is not marked as default, so it is not used.
 
 **Concept: Why do we need a StorageClass?**
-Postgres asks Kubernetes for a disk using a PersistentVolumeClaim. Newer EKS clusters do not mark any storage class as default, so that request would stay `Pending` forever. The gp3 StorageClass tells Kubernetes how to create an AWS EBS gp3 volume when a pod asks for storage.
+Postgres asks Kubernetes for a disk using a PersistentVolumeClaim. Newer EKS clusters do not mark any storage class as default, so a claim without a storage class would stay `Pending` forever. The gp3 StorageClass tells Kubernetes how to create an AWS EBS gp3 volume when a pod asks for storage.
 
 ### Prove that storage works
 
@@ -336,12 +336,15 @@ spec:
 EOF
 ```
 
-Wait about 30 seconds, then check:
+Wait until the pod is ready. The first time, AWS has to create and attach the disk and the node has to pull the image, so this can take up to a minute:
 
 ```bash
+kubectl wait --for=condition=Ready pod/storage-test --timeout=180s
 kubectl get pvc storage-test
 kubectl logs storage-test
 ```
+
+If you run `kubectl logs` too early you will see "waiting to start: ContainerCreating". That is not an error. Just wait and run it again.
 
 **Checkpoint:** the PVC shows `Bound` and the log says `storage works`.
 
